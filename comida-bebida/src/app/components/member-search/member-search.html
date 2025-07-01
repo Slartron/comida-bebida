@@ -1,0 +1,5 @@
+<div>
+    <label for="searchName">Dein Name</label>
+    <input id="searchName" placeholder="Gib deinen Namen ein" [(ngModel)]="searchName">
+    <button (click)="search()" [disabled]="!searchName">Suche</button>
+</div>

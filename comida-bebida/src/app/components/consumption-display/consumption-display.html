@@ -1,0 +1,19 @@
+<div *ngIf="!memberName">
+    <div>Keine Daten!</div>
+</div>
+<div>Hallo, {{memberName}}, hier siehst Du was Du seit der letzten Abrechnung verbraucht hast und kannst deinen
+    aktuellen Verbrauch eintragen:</div>
+<div><span>Bisher verbraucht</span><span>Artikel genommen</span></div>
+<div *ngIf="categories && memberName">
+    <div *ngFor="let category of categories">
+        <span>{{category?.description}}</span>&nbsp;
+        <span>{{category?.price}}</span>€&nbsp;
+        <span>{{getConsume(category.id)}}</span> Stk.
+        <button (click)="decreaseConsume(category.id)" [disabled]="(newConsumptions[category.id])===0">-1</button>
+        {{newConsumptions[category.id]}}
+        <button (click)="increaseConsume(category.id)">+1</button>
+        <button (click)="clearConsume(category.id)">Löschen</button>
+    </div>
+    <button (click)="saveConsumptions()">Speichern</button>
+</div>
+<button type="button" [routerLink]="['']">Zurück</button>
