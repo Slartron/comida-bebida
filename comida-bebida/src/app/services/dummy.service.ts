@@ -8,12 +8,12 @@ import { Consumption } from '../models/consumption';
   providedIn: 'root',
 })
 export class DummyService implements ApiService {
+  //TODO ersetze storage durch Local Storage oder IndexedDB
+  private storage = new Map<string, Consumption[]>();
+
   getConsumptions(searchName: string): Observable<Consumption[]> {
-    return new Observable((observer) => {
-      observer.next([
-        { categoryId: '1', quantity: 2 },
-        { categoryId: '2', quantity: 5 },
-      ]);
+    return new Observable<Consumption[]>((observer) => {
+      observer.next(this.storage.get(searchName) || []);
       observer.complete();
     });
   }
@@ -30,5 +30,22 @@ export class DummyService implements ApiService {
       ]);
       observer.complete();
     });
+  }
+
+  saveConsumptions(
+    memberName: string,
+    newConsumptions: { [catId: string]: number }
+  ): Observable<Consumption[]> {
+    const consmpt = this.storage.get(memberName) || [];
+    for (const [catId, quantity] of Object.entries(newConsumptions)) {
+      const existingConsumption = consmpt.find((c) => c.categoryId === catId);
+      if (existingConsumption) {
+        existingConsumption.quantity += quantity;
+      } else {
+        consmpt.push({ categoryId: catId, quantity });
+      }
+    }
+    this.storage.set(memberName, consmpt);
+    return this.getConsumptions(memberName);
   }
 }

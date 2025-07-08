@@ -19,4 +19,11 @@ export class ApiFacade {
   getConsumptions(searchName: string): Observable<Consumption[]> {
     return this.apiService.getConsumptions(searchName);
   }
+
+  saveConsumptions(
+    memberName: string,
+    newConsumptions: { [catId: string]: number }
+  ): Observable<Consumption[]> {
+    return this.apiService.saveConsumptions(memberName, newConsumptions);
+  }
 }

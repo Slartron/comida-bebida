@@ -32,4 +32,22 @@ export class ConsumptionService extends ApiService {
       })
     );
   }
+
+  saveConsumptions(
+    memberName: string,
+    newConsumptions: { [catId: string]: number }
+  ): Observable<Consumption[]> {
+    //TODO: fix call
+    return this.http
+      .post<Consumption[]>('https://localhost:54321', {
+        memberName: memberName,
+        newConsumptions: newConsumptions,
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Fehler beim Speichern der Verbrauchsdaten:', error);
+          return of([]); // Rückgabe eines leeren Arrays bei Fehler
+        })
+      );
+  }
 }

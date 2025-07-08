@@ -42,8 +42,26 @@ export class ConsumptionDisplay implements OnInit {
   }
 
   protected saveConsumptions() {
-    // TODO: Implementieren
-    throw new Error('Method not implemented.');
+    if (!this.memberName) {
+      return;
+    }
+
+    this.apiFacade
+      .saveConsumptions(this.memberName, this.newConsumptions)
+      .subscribe({
+        next: (response: Consumption[]) => {
+          this.router.navigate(['']);
+        },
+        error: (err: any) => {
+          console.error(
+            'Fehler beim Speichern des eingegebenen Verbrauchs:',
+            err
+          );
+          alert(
+            'Fehler beim Speichern des eingegebenen Verbrauchs. Bitte versuchen Sie es später erneut.'
+          );
+        },
+      });
   }
 
   protected decreaseConsume(catId: string): void {
@@ -53,11 +71,11 @@ export class ConsumptionDisplay implements OnInit {
     }
   }
 
-  increaseConsume(catId: string): void {
+  protected increaseConsume(catId: string): void {
     this.newConsumptions[catId] = this.newConsumptions[catId] + 1;
   }
 
-  clearConsume(catId: string): void {
+  protected clearConsume(catId: string): void {
     this.newConsumptions[catId] = 0;
   }
 }
