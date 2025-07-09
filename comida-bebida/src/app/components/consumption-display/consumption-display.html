@@ -12,8 +12,10 @@
         <button (click)="decreaseConsume(category.id)" [disabled]="(newConsumptions[category.id])===0">-1</button>
         {{newConsumptions[category.id]}}
         <button (click)="increaseConsume(category.id)">+1</button>
-        <button (click)="clearConsume(category.id)">Löschen</button>
+        <button (click)="clearConsume(category.id)" [disabled]="(newConsumptions[category.id])===0">Löschen</button>
     </div>
-    <button (click)="saveConsumptions()">Speichern</button>
+    <button (click)="saveConsumptions()" [disabled]="saveDisabled">Speichern</button>
 </div>
-<button type="button" [routerLink]="['']">Zurück</button>
+<button type="button" [routerLink]="['']" *ngIf="countdown===0">Abbrechen</button>
+<button type="button" [routerLink]="['']" *ngIf="countdown > 0" (click)="cancelCountdown()">Zurück in {{countdown}}
+    Sek.</button>

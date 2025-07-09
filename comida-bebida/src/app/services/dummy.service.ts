@@ -1,14 +1,13 @@
 import { Observable } from 'rxjs';
 import { Category } from '../models/category';
 import { ApiService } from './api.service';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Consumption } from '../models/consumption';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DummyService implements ApiService {
-  //TODO ersetze storage durch Local Storage oder IndexedDB
   private storage = new Map<string, Consumption[]>();
 
   getConsumptions(searchName: string): Observable<Consumption[]> {
