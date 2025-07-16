@@ -1,9 +1,13 @@
 <div *ngIf="!memberName">
     <div>Keine Daten!</div>
 </div>
-<div>Hallo, {{memberName}}, hier siehst Du was Du seit der letzten Abrechnung verbraucht hast und kannst deinen
+<div>Hallo, {{memberName}}, </div>
+<div>hier siehst Du was Du seit der letzten Abrechnung verbraucht hast und kannst deinen
     aktuellen Verbrauch eintragen:</div>
-<div><span>Bisher verbraucht</span><span>Artikel genommen</span></div>
+<div>
+    <div>Bisher verbraucht</div>
+    <div>Artikel genommen</div>
+</div>
 <div *ngIf="categories && memberName">
     <div *ngFor="let category of categories">
         <span>{{category?.description}}</span>&nbsp;

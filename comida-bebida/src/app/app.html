@@ -1,5 +1,22 @@
-<h1>Comida, Bebida?</h1>
+<header class="app-header">
+    <h1>
+        Getränke und Snacks
+    </h1>
+</header>
 
-<h2>Du willst etwas trinken oder essen? Dann bist du hier genau richtig!</h2>
+<nav class="app-navbar">
+    <ul>
+        <li><a href="#">Start</a></li>
+        <li><a href="#">Bestand</a></li>
+    </ul>
+</nav>
 
-<router-outlet />
+<main class="app-content">
+    <div class="content-box">
+        <router-outlet />
+    </div>
+</main>
+
+<footer class="app-footer">
+    <a href="https://www.billardfreunde.de">&copy; Billardfreunde 86 e.V.</a>
+</footer>
