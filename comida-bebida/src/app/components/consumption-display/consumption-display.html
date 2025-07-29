@@ -1,25 +1,61 @@
 <div *ngIf="!memberName">
     <div>Keine Daten!</div>
 </div>
-<div>Hallo, {{memberName}}, </div>
-<div>hier siehst Du was Du seit der letzten Abrechnung verbraucht hast und kannst deinen
-    aktuellen Verbrauch eintragen:</div>
+<div>Hallo {{memberName}}, </div>
+<p>hier siehst Du was Du seit der letzten Abrechnung verbraucht hast und kannst eintragen, was Du genommen hast:</p>
+
+<mat-card>
+    <mat-card-title>Dein Verbrauch</mat-card-title>
+    <mat-table [dataSource]="productConsumptions" class="mat-elevation-z2">
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef class="table-col col-name">Artikel</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="table-col col-name">{{element.name}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef class="table-col col-price">Preis</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="table-col col-price">{{element.price |
+                number:'1.2-2'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+            <mat-header-cell *matHeaderCellDef class="table-col col-quantity">Verbrauch bisher</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="table-col col-quantity">{{element.quantity}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="withdrawnQty">
+            <mat-header-cell *matHeaderCellDef class="table-col col-withdrawnQty">Entnommen</mat-header-cell>
+            <mat-cell *matCellDef="let element" class="table-col col-withdrawnQty">
+                <input class="withdrawQty" matInput type="number" [value]="element.withdrawnQty"
+                    (input)="onInputChange(element, $event)" />
+                <button matIconButton (click)="decreaseConsume(element)">
+                    <mat-icon fontIcon="remove" />
+                </button>
+                <button matIconButton (click)="increaseConsume(element)">
+                    <mat-icon fontIcon="add" />
+                </button>
+                <button matIconButton (click)="clearConsume(element)" [disabled]="element.withdrawnQty===0">
+                    <mat-icon fontIcon="delete" />
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+</mat-card>
 <div>
-    <div>Bisher verbraucht</div>
-    <div>Artikel genommen</div>
+    <button class="dataOp" matFab extended (click)="saveConsumptions()" [disabled]="saveDisabled">
+        <mat-icon fontIcon="save" />
+        Speichern
+    </button>
+    <button matFab extended *ngIf="countdown===0" [routerLink]="['']">
+        <mat-icon fontIcon="arrow_back_ios" />
+        Zurück
+    </button>
+    <button matFab extended *ngIf="countdown > 0" [routerLink]="['']" (click)="cancelCountdown()">
+        <mat-icon fontIcon="arrow_back_ios" />
+        Zurück in {{countdown}}
+    </button>
 </div>
-<div *ngIf="categories && memberName">
-    <div *ngFor="let category of categories">
-        <span>{{category?.description}}</span>&nbsp;
-        <span>{{category?.price}}</span>€&nbsp;
-        <span>{{getConsume(category.id)}}</span> Stk.
-        <button (click)="decreaseConsume(category.id)" [disabled]="(newConsumptions[category.id])===0">-1</button>
-        {{newConsumptions[category.id]}}
-        <button (click)="increaseConsume(category.id)">+1</button>
-        <button (click)="clearConsume(category.id)" [disabled]="(newConsumptions[category.id])===0">Löschen</button>
-    </div>
-    <button (click)="saveConsumptions()" [disabled]="saveDisabled">Speichern</button>
-</div>
-<button type="button" [routerLink]="['']" *ngIf="countdown===0">Abbrechen</button>
-<button type="button" [routerLink]="['']" *ngIf="countdown > 0" (click)="cancelCountdown()">Zurück in {{countdown}}
-    Sek.</button>

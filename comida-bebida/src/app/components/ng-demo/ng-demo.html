@@ -1,0 +1,45 @@
+<mat-card>
+    <mat-card-title>Getränkeübersicht</mat-card-title>
+
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z2">
+
+        <!-- Name -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Getränk </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        </ng-container>
+
+        <!-- Preis -->
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Preis (€) </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.price | number:'1.2-2'}} </mat-cell>
+        </ng-container>
+
+        <!-- Bisheriger Verbrauch -->
+        <ng-container matColumnDef="consumption">
+            <mat-header-cell *matHeaderCellDef> Verbrauch </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.consumption}} </mat-cell>
+        </ng-container>
+
+        <!-- Neue Anzahl -->
+        <ng-container matColumnDef="newAmount">
+            <mat-header-cell *matHeaderCellDef> Neue Anzahl </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <input matInput type="number" [value]="element.newAmount" style="width: 60px;" />
+            </mat-cell>
+        </ng-container>
+
+        <!-- Buttons -->
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef> Aktionen </mat-header-cell>
+            <mat-cell *matCellDef="let element">
+                <button mat-mini-button color="primary" (click)="decrement(element)">−</button>
+                <button mat-mini-button color="accent" (click)="increment(element)">+</button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+</mat-card>

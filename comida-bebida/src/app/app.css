@@ -1,3 +1,10 @@
+header {
+  background-color: #1976d2;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+}
+
 .app-header,
 .app-footer {
   background-color: #1976d2;

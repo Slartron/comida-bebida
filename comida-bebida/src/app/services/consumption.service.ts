@@ -14,7 +14,7 @@ export class ConsumptionService extends ApiService {
   }
 
   getCategories(): Observable<Category[]> {
-    // TODO: fix call
+    // TODO: fix call. Das Backend ist noch nicht implementiert.
     return this.http.get<Category[]>('https://localhost:54321').pipe(
       catchError((error) => {
         console.error('Fehler beim Abrufen der Kategorien:', error);
@@ -24,7 +24,7 @@ export class ConsumptionService extends ApiService {
   }
 
   getConsumptions(searchName: string): Observable<Consumption[]> {
-    // TODO: fix call
+    // TODO: fix call. Das Backend ist noch nicht implementiert.
     return this.http.get<Consumption[]>('https://localhost:54321').pipe(
       catchError((error) => {
         console.error('Fehler beim Abrufen der Kategorien:', error);
@@ -37,7 +37,7 @@ export class ConsumptionService extends ApiService {
     memberName: string,
     newConsumptions: { [catId: string]: number }
   ): Observable<Consumption[]> {
-    //TODO: fix call
+    //TODO: fix call. Das Backend ist noch nicht implementiert.
     return this.http
       .post<Consumption[]>('https://localhost:54321', {
         memberName: memberName,

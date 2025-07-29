@@ -1,5 +1,12 @@
 <div>
-    <label for="searchName">Dein Name</label>
-    <input id="searchName" placeholder="Gib deinen Namen ein" [(ngModel)]="searchName">
-    <button (click)="search()" [disabled]="!searchName">Suche</button>
+    <mat-form-field appearance="outline">
+        <mat-label>Dein Name</mat-label>
+        <input matInput class="input-elt" [(ngModel)]="searchName" (keydown.enter)="search()" />
+        <button mat-icon-button matSuffix (click)="search()" [disabled]="!searchName" type="button"
+            aria-label="Starte Suche anhand Deines Namens">
+            <mat-icon fontIcon="search" />
+        </button>
+    </mat-form-field>
+    <p>Nachdem Du Deinen Namen eingegeben hast, kannst Du sehen, was Du bisher verbraucht hast und eintragen, was Du Dir
+        genommen hast.</p>
 </div>

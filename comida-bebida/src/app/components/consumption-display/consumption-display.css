@@ -1,0 +1,44 @@
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.dataOp {
+  margin: 30px 20px 30px 20px;
+}
+
+.table-col {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.col-name {
+  width: 40%;
+  min-width: 25%;
+}
+.col-price {
+  width: 15%;
+  min-width: 15%;
+}
+.col-quantity {
+  width: 20%;
+  min-width: 20%;
+}
+.col-withdrawnQty {
+  width: 20%;
+  min-width: min-content;
+}
+.withdrawQty {
+  text-align: center;
+  width: 60px;
+  font-size: 20pt;
+}
